@@ -47,6 +47,7 @@ public class PurposeDao {
 		}
 		return ret;
 	}
+
 	public boolean insertpurpose(PurposeVo vo) {
 		boolean ret = false;
 		Connection conn = null;
@@ -88,4 +89,143 @@ public class PurposeDao {
 		return ret;
 	}
 
+	public boolean counttotal(PurposeVo vo) {
+		boolean ret = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String sql = "select count(\"PP_CODE\") from \"PURPOSE\"";
+		try {
+			conn = jdbctemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			int result = pstmt.executeUpdate(); // 孽府 傈价!
+			System.out.println(result);
+			ret = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		return ret;
+	}
+
+	public boolean rankplace(PurposeVo vo) {
+		boolean ret = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String sql = "select \"PLACE_CODE\", count(\"PLACE_CODE\") from \"PURPOSE\" group by \"PLACE_CODE\" order by count(\"PLACE_CODE\") asc";
+		try {
+			conn = jdbctemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			int result = pstmt.executeUpdate(); // 孽府 傈价!
+			System.out.println(result);
+			ret = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		return ret;
+	}
+
+	public boolean rankpurpose(PurposeVo vo) {
+		boolean ret = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String sql = "select \"PURPOSE\", count(\"PURPOSE\") from \"PURPOSE\" group by \"PURPOSE\" order by count(\"PURPOSE\") asc";
+		try {
+			conn = jdbctemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			int result = pstmt.executeUpdate(); // 孽府 傈价!
+			System.out.println(result);
+			ret = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		return ret;
+	}
+
+	public boolean resultage1(PurposeVo vo) {
+		boolean ret = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String sql = "select \"PLACE_CODE\" from \"PURPOSE\" group by \"PLACE_CODE\" having count(*) = (select max(\"top\") from (select “PLACE_CODE”, count(*) as \"top\" from \"PURPOSE\" group by \"PLACE_CODE\") as result)";
+		try {
+			conn = jdbctemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			int result = pstmt.executeUpdate(); // 孽府 傈价!
+			System.out.println(result);
+			ret = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		return ret;
+	}
 }

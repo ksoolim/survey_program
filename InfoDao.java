@@ -10,7 +10,7 @@ public class InfoDao {
 	public InfoDao() {
 	}
 
-	public boolean createinfo(InfoVo vo) {
+	public boolean createinfo() {
 		boolean ret = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -19,8 +19,6 @@ public class InfoDao {
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
-
-			System.out.println(sql);
 
 			pstmt.executeUpdate(); // 쿼리 전송!
 			System.out.println("테이블 생성완료!");

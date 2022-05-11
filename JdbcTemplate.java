@@ -14,7 +14,7 @@ public class JdbcTemplate {
 	private JdbcTemplate() {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver"); 
-			System.out.println("드라이버 로딩 성공!");
+			//System.out.println("드라이버 로딩 성공!");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
