@@ -2,13 +2,13 @@ package survey;
 
 public class PlaceVo {
 	private int pcode;
-	private int place;
+	private String place;
 
 	public PlaceVo() {
 
 	}
 
-	public PlaceVo(int pcode, int place) {
+	public PlaceVo(int pcode, String place) {
 		this.pcode = pcode;
 		this.place = place;
 	}
@@ -17,7 +17,7 @@ public class PlaceVo {
 		this.pcode = pcode;
 	}
 
-	public void setplace(int place) {
+	public void setplace(String place) {
 		this.place = place;
 	}
 
@@ -25,7 +25,7 @@ public class PlaceVo {
 		return pcode;
 	}
 
-	public int getplace() {
+	public String getplace() {
 		return place;
 	}
 

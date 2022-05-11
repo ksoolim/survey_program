@@ -21,7 +21,7 @@ public class InfoDao {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.executeUpdate(); // 쿼리 전송!
-			System.out.println("테이블 생성완료!");
+		//	System.out.println("테이블 생성완료!");
 			ret = true;
 		} catch (SQLException e) {
 			e.printStackTrace();

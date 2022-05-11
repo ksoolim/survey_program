@@ -10,21 +10,21 @@ public class PlaceDao {
 	public PlaceDao() {
 	}
 
-	public boolean createplace(PlaceVo vo) {
+	public boolean createplace() {
 		boolean ret = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		String sql 
-		= "create table \"PLACE\"(\"P_CODE\" number primary key, \"PLACE\" number not null)";
+		= "create table \"PLACE\"(\"P_CODE\" number primary key, \"PLACE\" varchar2(100) not null)";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			System.out.println(sql);
+			//System.out.println(sql);
 
 			pstmt.executeUpdate(); // 쿼리 전송!
-			System.out.println("테이블 생성완료!");
+		//	System.out.println("테이블 생성완료!");
 			ret = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -60,7 +60,7 @@ public class PlaceDao {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, vo.getpcode());
-			pstmt.setInt(2, vo.getplace());
+			pstmt.setString(2, vo.getplace());
 			System.out.println(sql);
 
 			int result = pstmt.executeUpdate(); // 쿼리 전송!

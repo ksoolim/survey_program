@@ -10,7 +10,7 @@ public class PurposeDao {
 	public PurposeDao() {
 	}
 
-	public boolean createpurpose(PurposeVo vo) {
+	public boolean createpurpose() {
 		boolean ret = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -21,10 +21,10 @@ public class PurposeDao {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			System.out.println(sql);
+			//System.out.println(sql);
 
 			pstmt.executeUpdate(); // 쿼리 전송!
-			System.out.println("테이블 생성완료!");
+			//System.out.println("테이블 생성완료!");
 			ret = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,7 +61,7 @@ public class PurposeDao {
 			pstmt.setInt(1, vo.getppcode());
 			pstmt.setInt(2, vo.getinfonumber());
 			pstmt.setInt(3, vo.getplacecode());
-			pstmt.setInt(3, vo.getpurpose());
+			pstmt.setInt(4, vo.getpurpose());
 			System.out.println(sql);
 
 			int result = pstmt.executeUpdate(); // 쿼리 전송!
