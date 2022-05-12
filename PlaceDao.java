@@ -61,7 +61,7 @@ public class PlaceDao {
 			pstmt.setString(2, vo.getplace());
 
 			pstmt.executeUpdate();
-			System.out.println("완료");
+			//System.out.println("완료");
 			ret = true;
 			conn.commit();
 		} catch (SQLException e) {
@@ -92,7 +92,7 @@ public class PlaceDao {
 		ResultSet rs = null;
 		int resultcount = 0;
 
-		String sql = "select count(*) from \"PLACE\" where \"P_CODE\"=1";
+		String sql = "select count(*) from \"PURPOSE\" where \"PLACE_CODE\"=1";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -129,7 +129,7 @@ public class PlaceDao {
 		ResultSet rs = null;
 		int resultcount = 0;
 
-		String sql = "select count(*) from \"PLACE\" where \"P_CODE\"=2";
+		String sql = "select count(*) from \"PURPOSE\" where \"PLACE_CODE\"=2";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -166,7 +166,7 @@ public class PlaceDao {
 		ResultSet rs = null;
 		int resultcount = 0;
 
-		String sql = "select count(*) from \"PLACE\" where \"P_CODE\"=3";
+		String sql = "select count(*) from \"PURPOSE\" where \"PLACE_CODE\"=3";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -202,17 +202,17 @@ public class PlaceDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String etcplace = "";
-
+		
 		String sql = "select \"PLACE\" from \"PLACE\" where \"P_CODE\" > 3";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
-
+					
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				etcplace = rs.getString(1);
-			}
-
+					etcplace = rs.getString(1);
+				}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

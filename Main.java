@@ -4,7 +4,9 @@ import java.util.Scanner;
 
 public class Main {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 
 		InfoDao info = new InfoDao();
@@ -12,12 +14,12 @@ public class Main {
 		PurposeDao purpose = new PurposeDao();
 
 		// 테이블만들기
+
 		info.createinfo();
 		place.createplace();
 		purpose.createpurpose();
 
 		// place 기본 데이터 입력
-
 		place.insertplace(new PlaceVo(1, "서부권 (합정, 성수, 망원, 연남, 연희)"));
 		place.insertplace(new PlaceVo(2, "강남, 가로수길"));
 		place.insertplace(new PlaceVo(3, "북촌, 서촌, 삼청동 일대"));
@@ -25,7 +27,7 @@ public class Main {
 		int cnt = 1;
 		int newpcode = 3;
 		while (true) {
-			System.out.println("cnt = " + cnt);
+			// System.out.println("cnt = " + cnt);
 			System.out.println("** 설문조사를 시작합니다! **");
 			System.out.println();
 
@@ -41,7 +43,7 @@ public class Main {
 			System.out.println("Q3. 자주 방문하는 플레이스는 어디일까요? 기타항목 선택 후 직접 입력 가능!");
 			System.out.println("1번 : 서부권 (합정, 성수, 망원, 연남, 연희)");
 			System.out.println("2번 : 강남, 가로수길");
-			System.out.println("3번 :  북촌, 서촌, 삼청동 일대)");
+			System.out.println("3번 :  북촌, 서촌, 삼청동 일대");
 			System.out.println("4번 : 기타(직접입력)");
 			int spot = Integer.parseInt(sc.nextLine());
 			if (spot == 4) {
@@ -52,7 +54,7 @@ public class Main {
 				place.insertplace(new PlaceVo(newpcode, newspot));
 			}
 
-			System.out.println("Q4. 3번 질문 장소의 방문목적은 무엇일까요? 기타항목 선택 후 직접 입력 가능!");
+			System.out.println("Q4. 3번 질문 장소의 방문목적은 무엇일까요?");
 			System.out.println("1번 : 맛집탐방");
 			System.out.println("2번 : 카페 투어");
 			System.out.println("3번 : 사진 촬영");

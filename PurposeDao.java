@@ -64,23 +64,23 @@ public class PurposeDao {
 			pstmt.setInt(4, vo.getpurpose());
 
 			pstmt.executeUpdate();
-			System.out.println("완료");
+		//	System.out.println("완료");
 			ret = true;
 			conn.commit();
 		} catch (SQLException e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
+				//	e.printStackTrace();
 				} finally {
 					if (conn != null) {
 						try {
 							conn.close();
 						} catch (SQLException e) {
-							e.printStackTrace();
+							//e.printStackTrace();
 						}
 					}
 				}
