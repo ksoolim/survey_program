@@ -3,30 +3,29 @@ package survey;
 import java.util.Scanner;
 
 public class Main {
-	// @SuppressWarnings("unused")
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
 		InfoDao info = new InfoDao();
 		PlaceDao place = new PlaceDao();
 		PurposeDao purpose = new PurposeDao();
-		
+
 		// 테이블만들기
-		// 완료 info.createinfo();
-		// 완료 place.createplace();
-		// 완료 purpose.createpurpose();
+		info.createinfo();
+		place.createplace();
+		purpose.createpurpose();
 
 		// place 기본 데이터 입력
-		/*
-		 * 완료 place.insertplace(new PlaceVo(1, "서부권 (합정, 성수, 망원, 연남, 연희)"));
-		 * place.insertplace(new PlaceVo(2, "강남, 가로수길")); 
-		 * place.insertplace(new PlaceVo(3, "북촌, 서촌, 삼청동 일대"));
-		 */
 
-	/*	int cnt = 1; 
-		int newpcode = 3; 
+		place.insertplace(new PlaceVo(1, "서부권 (합정, 성수, 망원, 연남, 연희)"));
+		place.insertplace(new PlaceVo(2, "강남, 가로수길"));
+		place.insertplace(new PlaceVo(3, "북촌, 서촌, 삼청동 일대"));
+
+		int cnt = 1;
+		int newpcode = 3;
 		while (true) {
-			System.out.println("cnt = "+cnt);
+			System.out.println("cnt = " + cnt);
 			System.out.println("** 설문조사를 시작합니다! **");
 			System.out.println();
 
@@ -42,7 +41,7 @@ public class Main {
 			System.out.println("Q3. 자주 방문하는 플레이스는 어디일까요? 기타항목 선택 후 직접 입력 가능!");
 			System.out.println("1번 : 서부권 (합정, 성수, 망원, 연남, 연희)");
 			System.out.println("2번 : 강남, 가로수길");
-			System.out.println("3번 :  북촌, 서촌, 삼청동 일대리");
+			System.out.println("3번 :  북촌, 서촌, 삼청동 일대)");
 			System.out.println("4번 : 기타(직접입력)");
 			int spot = Integer.parseInt(sc.nextLine());
 			if (spot == 4) {
@@ -73,17 +72,30 @@ public class Main {
 			if (end == 0) {
 				Object pass;
 				cnt++;
-			} else {*/
-			/*완료	System.out.println("** 설문결과  **");
-				System.out.println("설문참여인원 : " + purpose.counttotal()+"명");
-				System.out.println("10대 : "+ info.countinfoage1() +"명   20대 : "+info.countinfoage2()+"명  30대 : "+info.countinfoage3()+"명");
-				System.out.println("여 : "+ info.countinfosex1() +"명  남 : "+info.countinfosex2()+"명");
-				*/
-		System.out.println("<플레이스 순위별 결과>");
-		System.out.println(purpose.rankplace());
-			//	break; 
-		//	}
+			} else {
+				System.out.println("**  설문결과   **");
+				System.out.println("설문참여인원 : " + purpose.counttotal() + "명");
+				System.out.println("10대 : " + info.countinfoage1() + "명   20대 : " + info.countinfoage2() + "명  30대 : "
+						+ info.countinfoage3() + "명");
+				System.out.println("여 : " + info.countinfosex1() + "명  남 : " + info.countinfosex2() + "명");
 
-	//	} 
+				System.out.println("-------------------------------------");
+				System.out.println("<플레이스 결과 집계>");
+				System.out.println("1번: 서부권 -> " + place.countplace1() + "표");
+				System.out.println("2번: 강남권 -> " + place.countplace2() + "표");
+				System.out.println("3번: 종로일대 -> " + place.countplace3() + "표");
+				System.out.println("그 외 -> " + place.etcplace());
+				System.out.println();
+
+				System.out.println("<방문목적 결과 집계>");
+				System.out.println("1번: 맛집탐방 -> " + purpose.countpurpose1() + "표");
+				System.out.println("2번: 카페투어 -> " + purpose.countpurpose2() + "표");
+				System.out.println("3번: 사진촬영 -> " + purpose.countpurpose3() + "표");
+				System.out.println("4번: 이유없음 -> " + purpose.countpurpose4() + "표");
+
+				break;
+			}
+
+		}
 	}
 }

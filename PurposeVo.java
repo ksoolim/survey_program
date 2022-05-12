@@ -49,7 +49,4 @@ public class PurposeVo {
 		return purpose;
 	}
 
-	public String toString() {
-		return "PurposeVo = (" + ppcode + ", " + infonumber + ", " + placecode + ", " + purpose + " )";
-	}
 }

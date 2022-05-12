@@ -127,21 +127,22 @@ public class PurposeDao {
 		return resultcount;
 	}
 
-	public String rankplace() {
+	public int countpurpose1() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String result = "";
+		int resultcount = 0;
 
-		String sql = "select \"PLACE_CODE\" from \"PURPOSE\" group by \"PLACE_CODE\" order by count(\"PLACE_CODE\") desc";
+		String sql = "select count(*) from \"PURPOSE\" where \"PURPOSE\"=1";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				result = rs.getString("PLACE_CODE");
+				resultcount = rs.getInt(1);
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -149,7 +150,6 @@ public class PurposeDao {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
 				} finally {
 					if (conn != null) {
 						try {
@@ -161,22 +161,25 @@ public class PurposeDao {
 				}
 			}
 		}
-		return result;
+		return resultcount;
 	}
-
-	public boolean rankpurpose(PurposeVo vo) {
-		boolean ret = false;
+	
+	public int countpurpose2() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultcount = 0;
 
-		String sql = "select \"PURPOSE\", count(\"PURPOSE\") from \"PURPOSE\" group by \"PURPOSE\" order by count(\"PURPOSE\") asc";
+		String sql = "select count(*) from \"PURPOSE\" where \"PURPOSE\"=2";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			int result = pstmt.executeUpdate();
-			System.out.println(result);
-			ret = true;
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				resultcount = rs.getInt(1);
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -184,7 +187,6 @@ public class PurposeDao {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
 				} finally {
 					if (conn != null) {
 						try {
@@ -196,22 +198,25 @@ public class PurposeDao {
 				}
 			}
 		}
-		return ret;
+		return resultcount;
 	}
-
-	public boolean resultage1(PurposeVo vo) {
-		boolean ret = false;
+	
+	public int countpurpose3() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultcount = 0;
 
-		String sql = "select \"PLACE_CODE\" from \"PURPOSE\" group by \"PLACE_CODE\" having count(*) = (select max(\"top\") from (select ��PLACE_CODE��, count(*) as \"top\" from \"PURPOSE\" group by \"PLACE_CODE\") as result)";
+		String sql = "select count(*) from \"PURPOSE\" where \"PURPOSE\"=3";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			int result = pstmt.executeUpdate();
-			System.out.println(result);
-			ret = true;
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				resultcount = rs.getInt(1);
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -219,7 +224,6 @@ public class PurposeDao {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
 				} finally {
 					if (conn != null) {
 						try {
@@ -231,6 +235,44 @@ public class PurposeDao {
 				}
 			}
 		}
-		return ret;
+		return resultcount;
+	}
+	public int countpurpose4() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultcount = 0;
+
+		String sql = "select count(*) from \"PURPOSE\" where \"PURPOSE\"=4";
+		try {
+			conn = jdbctemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				resultcount = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		return resultcount;
 	}
 }
+
+

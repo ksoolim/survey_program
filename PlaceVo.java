@@ -29,7 +29,5 @@ public class PlaceVo {
 		return place;
 	}
 
-	public String toString() {
-		return "PlaceVo = (" + pcode + ", " + place + " )";
-	}
+	
 }

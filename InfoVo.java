@@ -39,8 +39,5 @@ public class InfoVo {
 		return sex;
 	}
 
-	// override
-	public String toString() {
-		return "InfoVo = (" + number + ", " + agegroup + ", " + sex + " )";
-	}
+	
 }
