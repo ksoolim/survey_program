@@ -2,6 +2,7 @@ package survey;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class InfoDao {
@@ -20,8 +21,7 @@ public class InfoDao {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
-		//	System.out.println("Å×ÀÌºí »ý¼º¿Ï·á!");
+			pstmt.executeUpdate();
 			ret = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -53,16 +53,17 @@ public class InfoDao {
 		String sql = "insert into \"INFO\" values (?, ?, ?)";
 		try {
 			conn = jdbctemplate.getConnection();
+			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, vo.getnumber());
 			pstmt.setInt(2, vo.getage());
 			pstmt.setInt(3, vo.getsex());
-			System.out.println(sql);
 
-			int result = pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
-			System.out.println(result + "ÇàÀÌ »ðÀÔµÇ¾ú½À´Ï´Ù");
+			pstmt.executeUpdate();
+			System.out.println("ì™„ë£Œ");
 			ret = true;
+			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -85,20 +86,21 @@ public class InfoDao {
 		return ret;
 	}
 
-	public boolean countinfoage(InfoVo vo) {
-		boolean ret = false;
+	public int countinfoage1() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultcount = 0;
 
-
-		String sql = "select count(*) from \"INFO\" group by \"AGEGROUP\"";
+		String sql = "select count(*) from \"INFO\" where \"AGEGROUP\"=1";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			int result = pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
-			System.out.println(result);
-			ret = true;
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				resultcount = rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -118,22 +120,24 @@ public class InfoDao {
 				}
 			}
 		}
-		return ret;
+		return resultcount;
 	}
 
-	public boolean countinfosex(InfoVo vo) {
-		boolean ret = false;
+	public int countinfoage2() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultcount = 0;
 
-		String sql = "select count(*) from \"INFO\" group by \"SEX\"";
+		String sql = "select count(*) from \"INFO\" where \"AGEGROUP\"=2";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			int result = pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
-			System.out.println(result);
-			ret = true;
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				resultcount = rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -153,7 +157,119 @@ public class InfoDao {
 				}
 			}
 		}
-		return ret;
+		return resultcount;
+	}
+
+	public int countinfoage3() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultcount = 0;
+
+		String sql = "select count(*) from \"INFO\" where \"AGEGROUP\"=3";
+		try {
+			conn = jdbctemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				resultcount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		return resultcount;
+	}
+
+	public int countinfosex1() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultcount = 0;
+
+		String sql = "select count(*) from \"INFO\" where \"SEX\"=1";
+		try {
+			conn = jdbctemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				resultcount = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		return resultcount;
+	}
+
+	public int countinfosex2() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultcount = 0;
+
+		String sql = "select count(*) from \"INFO\" where \"SEX\"=2";
+		try {
+			conn = jdbctemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				resultcount = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				} finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		return resultcount;
 	}
 
 }

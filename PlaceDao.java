@@ -15,16 +15,13 @@ public class PlaceDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		String sql 
-		= "create table \"PLACE\"(\"P_CODE\" number primary key, \"PLACE\" varchar2(100) not null)";
+		String sql = "create table \"PLACE\"(\"P_CODE\" number primary key, \"PLACE\" varchar2(100) not null)";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			//System.out.println(sql);
+			pstmt.executeUpdate();
 
-			pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
-		//	System.out.println("Å×ÀÌºí »ý¼º¿Ï·á!");
 			ret = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -53,19 +50,19 @@ public class PlaceDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		String sql 
-		= "insert into \"PLACE\" values (?, ?)";
+		String sql = "insert into \"PLACE\" values (?, ?)";
 		try {
 			conn = jdbctemplate.getConnection();
+			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, vo.getpcode());
 			pstmt.setString(2, vo.getplace());
-			System.out.println(sql);
 
-			int result = pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
-			System.out.println(result + "ÇàÀÌ »ðÀÔµÇ¾ú½À´Ï´Ù");
+			pstmt.executeUpdate();
+			System.out.println("ì™„ë£Œ");
 			ret = true;
+			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

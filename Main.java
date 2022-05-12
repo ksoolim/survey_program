@@ -3,60 +3,87 @@ package survey;
 import java.util.Scanner;
 
 public class Main {
+	// @SuppressWarnings("unused")
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
 		InfoDao info = new InfoDao();
 		PlaceDao place = new PlaceDao();
 		PurposeDao purpose = new PurposeDao();
-		// Å×ÀÌºí¸¸µé±â
-		// info.createinfo();
-		place.createplace();
-	 purpose.createpurpose();
-	 
-	 //place Å×ÀÌºí ±âº» µ¥ÀÌÅÍ »ğÀÔ
-	 place.insertplace(new PlaceVo(1, "¼­ºÎ±Ç (ÇÕÁ¤, ¼º¼ö, ¸Á¿ø, ¿¬³², ¿¬Èñ)"));
-	 place.insertplace(new PlaceVo(2, "°­³², °¡·Î¼ö±æ"));
-	 place.insertplace(new PlaceVo(3, "ºÏÃÌ, ¼­ÃÌ, »ïÃ»µ¿ ÀÏ´ë"));
-	 
-
-		//int cnt = 0; // °¢ Å×ÀÌºíÀÇ primary key
-
-	/*	System.out.println("**¾Æ·¡ Áú¹®¿¡ ÇÏ³ª¾¿ ´äº¯ÇØÁÖ¼¼¿ä! :) **");
-		System.out.println("Q1. º»ÀÎÀÇ ¿¬·É´ë¿¡ ÇØ´çµÇ´Â ¹øÈ£¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä!");
-		System.out.println("(1¹ø : 14~19¼¼, 2¹ø : 20~29¼¼, 3¹ø : 30~39¼¼)");
-		int age = Integer.parseInt(sc.nextLine());
-		System.out.println("Q2. º»ÀÎÀÇ ¼ºº°¿¡ ÇØ´çµÇ´Â ¹øÈ£¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä!");
-		System.out.println("(1¹ø : ¿©¼º , 2¹ø : ³²¼º)");
-		int sex = Integer.parseInt(sc.nextLine());
-
-		info.insertinfo(new InfoVo(1,age,sex));
-*/
-	/*	System.out.println("Q3. ÀÚÁÖ ¹æ¹®ÇÏ´Â ÇÃ·¹ÀÌ½º´Â ¾îµğÀÏ±î¿ä? ±âÅ¸Ç×¸ñ ¼±ÅÃ ÈÄ Á÷Á¢ ÀÔ·Â °¡´É!");
-		System.out.println("1¹ø : ¼­ºÎ±Ç (ÇÕÁ¤, ¼º¼ö, ¸Á¿ø, ¿¬³², ¿¬Èñ)");
-		System.out.println("2¹ø : °­³², °¡·Î¼ö±æ");
-		System.out.println("3¹ø : ºÏÃÌ, ¼­ÃÌ, »ïÃ»µ¿ ÀÏ´ë");
-		System.out.println("4¹ø : ±âÅ¸(Á÷Á¢ÀÔ·Â)");
-		int spot = Integer.parseInt(sc.nextLine());
-		if (spot == 4) {		
-			System.out.println("ÀÔ·ÂÇÏ¼¼¿ä");	
-		 int newspot = Integer.parseInt(sc.nextLine());
-		 
-
-		}
 		
-		
-		System.out.println("Q4. 3¹ø Áú¹® Àå¼ÒÀÇ ¹æ¹®¸ñÀûÀº ¹«¾ùÀÏ±î¿ä? ±âÅ¸Ç×¸ñ ¼±ÅÃ ÈÄ Á÷Á¢ ÀÔ·Â °¡´É!");
-		System.out.println("1¹ø : ¸ÀÁı Å½¹æ");
-		System.out.println("2¹ø : Ä«Æä Åõ¾î");
-		System.out.println("3¹ø : »çÁø ÃÔ¿µ");
-		System.out.println("4¹ø : ±×³É! Æ¯º°ÇÑ ÀÌÀ¯¾øÀ½.");
-		int visit = Integer.parseInt(sc.nextLine());
-		
-		System.out.println("** Âü¿©ÇØ ÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù");
-		System.out.println("»õ·Î¿î ¼³¹® ½ÃÀÛÀº ¡®5¹ø¡¯ , ¼³¹®°á°ú¸¦ º¸½Ã·Á¸é ¡®6¹ø¡¯À» ÀÔ·ÂÇØÁÖ¼¼¿ä! **");
-*/
+		// í…Œì´ë¸”ë§Œë“¤ê¸°
+		// ì™„ë£Œ info.createinfo();
+		// ì™„ë£Œ place.createplace();
+		// ì™„ë£Œ purpose.createpurpose();
 
+		// place ê¸°ë³¸ ë°ì´í„° ì…ë ¥
+		/*
+		 * ì™„ë£Œ place.insertplace(new PlaceVo(1, "ì„œë¶€ê¶Œ (í•©ì •, ì„±ìˆ˜, ë§ì›, ì—°ë‚¨, ì—°í¬)"));
+		 * place.insertplace(new PlaceVo(2, "ê°•ë‚¨, ê°€ë¡œìˆ˜ê¸¸")); 
+		 * place.insertplace(new PlaceVo(3, "ë¶ì´Œ, ì„œì´Œ, ì‚¼ì²­ë™ ì¼ëŒ€"));
+		 */
+
+	/*	int cnt = 1; 
+		int newpcode = 3; 
+		while (true) {
+			System.out.println("cnt = "+cnt);
+			System.out.println("** ì„¤ë¬¸ì¡°ì‚¬ë¥¼ ì‹œì‘í•©ë‹ˆë‹¤! **");
+			System.out.println();
+
+			System.out.println("Q1. ë³¸ì¸ì˜ ì—°ë ¹ëŒ€ì— í•´ë‹¹ë˜ëŠ” ë²ˆí˜¸ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”!");
+			System.out.println("(1ë²ˆ : 14~19ì„¸,  2ë²ˆ : 20~29ì„¸ , 3ë²ˆ : 30~39ì„¸)");
+			int age = Integer.parseInt(sc.nextLine());
+			System.out.println("Q2. ë³¸ì¸ì˜ ì„±ë³„ì— í•´ë‹¹ë˜ëŠ” ë²ˆí˜¸ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”!");
+			System.out.println("(1ë²ˆ :  ì—¬ì„± , 2ë²ˆ : ë‚¨ì„±)");
+			int sex = Integer.parseInt(sc.nextLine());
+
+			info.insertinfo(new InfoVo(cnt, age, sex));
+
+			System.out.println("Q3. ìì£¼ ë°©ë¬¸í•˜ëŠ” í”Œë ˆì´ìŠ¤ëŠ” ì–´ë””ì¼ê¹Œìš”? ê¸°íƒ€í•­ëª© ì„ íƒ í›„ ì§ì ‘ ì…ë ¥ ê°€ëŠ¥!");
+			System.out.println("1ë²ˆ : ì„œë¶€ê¶Œ (í•©ì •, ì„±ìˆ˜, ë§ì›, ì—°ë‚¨, ì—°í¬)");
+			System.out.println("2ë²ˆ : ê°•ë‚¨, ê°€ë¡œìˆ˜ê¸¸");
+			System.out.println("3ë²ˆ :  ë¶ì´Œ, ì„œì´Œ, ì‚¼ì²­ë™ ì¼ëŒ€ë¦¬");
+			System.out.println("4ë²ˆ : ê¸°íƒ€(ì§ì ‘ì…ë ¥)");
+			int spot = Integer.parseInt(sc.nextLine());
+			if (spot == 4) {
+				System.out.println("ì…ë ¥í•´ì£¼ì„¸ìš”");
+				String newspot = sc.nextLine();
+				newpcode++;
+
+				place.insertplace(new PlaceVo(newpcode, newspot));
+			}
+
+			System.out.println("Q4. 3ë²ˆ ì§ˆë¬¸ ì¥ì†Œì˜ ë°©ë¬¸ëª©ì ì€ ë¬´ì—‡ì¼ê¹Œìš”? ê¸°íƒ€í•­ëª© ì„ íƒ í›„ ì§ì ‘ ì…ë ¥ ê°€ëŠ¥!");
+			System.out.println("1ë²ˆ : ë§›ì§‘íƒë°©");
+			System.out.println("2ë²ˆ : ì¹´í˜ íˆ¬ì–´");
+			System.out.println("3ë²ˆ : ì‚¬ì§„ ì´¬ì˜");
+			System.out.println("4ë²ˆ : ê·¸ëƒ¥! ì´ìœ ì—†ìŒ");
+			int visit = Integer.parseInt(sc.nextLine());
+			purpose.insertpurpose(new PurposeVo(cnt, cnt, spot, visit));
+
+			if (spot == 4) {
+
+				purpose.insertpurpose(new PurposeVo(cnt, cnt, newpcode, visit));
+			}
+
+			System.out.println("** ì°¸ì—¬í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤!");
+			System.out.println("ìƒˆë¡œìš´ ì„¤ë¬¸ ì‹œì‘ì€ â€˜0ë²ˆâ€™ , ì„¤ë¬¸ê²°ê³¼ë¥¼ ë³´ì‹œë ¤ë©´ â€˜1ë²ˆâ€™ì„ ì…ë ¥í•´ì£¼ì„¸ìš”! **");
+			int end = Integer.parseInt(sc.nextLine());
+
+			if (end == 0) {
+				Object pass;
+				cnt++;
+			} else {*/
+			/*ì™„ë£Œ	System.out.println("** ì„¤ë¬¸ê²°ê³¼  **");
+				System.out.println("ì„¤ë¬¸ì°¸ì—¬ì¸ì› : " + purpose.counttotal()+"ëª…");
+				System.out.println("10ëŒ€ : "+ info.countinfoage1() +"ëª…   20ëŒ€ : "+info.countinfoage2()+"ëª…  30ëŒ€ : "+info.countinfoage3()+"ëª…");
+				System.out.println("ì—¬ : "+ info.countinfosex1() +"ëª…  ë‚¨ : "+info.countinfosex2()+"ëª…");
+				*/
+		System.out.println("<í”Œë ˆì´ìŠ¤ ìˆœìœ„ë³„ ê²°ê³¼>");
+		System.out.println(purpose.rankplace());
+			//	break; 
+		//	}
+
+	//	} 
 	}
-
 }

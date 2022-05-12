@@ -2,6 +2,7 @@ package survey;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PurposeDao {
@@ -15,16 +16,14 @@ public class PurposeDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		String sql = "create table \"PURPOSE\"(\"PP_CODE\" number primary key, \"INFO_NUMBER\" number, \"PLACE_CODE\" number, \"PURPOSE\" number not null, constraint \"FK_INFO_NUMBER\" foreign key(\"INFO_NUMBER\") references \"INFO\"(\"NUMBER\") on delete cascade, constraint \"FK_PLACE_CODE\" foreign key(\"PLACE_CODE\") references \"PLACE\"(\"P_CODE\") on delete cascade";
+		String sql = "create table \"PURPOSE\"(\"PP_CODE\" number primary key, \"INFO_NUMBER\" number, \"PLACE_CODE\" number, \"PURPOSE\" number not null, constraint \"FK_INFO_NUMBER\" foreign key(\"INFO_NUMBER\") references \"INFO\"(\"NUMBER\") on delete cascade, constraint \"FK_PLACE_CODE\" foreign key(\"PLACE_CODE\") references \"PLACE\"(\"P_CODE\") on delete cascade)";
 
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			//System.out.println(sql);
+			pstmt.executeUpdate();
 
-			pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
-			//System.out.println("Å×ÀÌºí »ý¼º¿Ï·á!");
 			ret = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,17 +55,18 @@ public class PurposeDao {
 		String sql = "insert into \"PURPOSE\" values (?, ?, ?, ?)";
 		try {
 			conn = jdbctemplate.getConnection();
+			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, vo.getppcode());
 			pstmt.setInt(2, vo.getinfonumber());
 			pstmt.setInt(3, vo.getplacecode());
 			pstmt.setInt(4, vo.getpurpose());
-			System.out.println(sql);
 
-			int result = pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
-			System.out.println(result + "ÇàÀÌ »ðÀÔµÇ¾ú½À´Ï´Ù");
+			pstmt.executeUpdate();
+			System.out.println("ì™„ë£Œ");
 			ret = true;
+			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -89,19 +89,22 @@ public class PurposeDao {
 		return ret;
 	}
 
-	public boolean counttotal(PurposeVo vo) {
-		boolean ret = false;
+	public int counttotal() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultcount = 0;
 
 		String sql = "select count(\"PP_CODE\") from \"PURPOSE\"";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			int result = pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
-			System.out.println(result);
-			ret = true;
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				resultcount = rs.getInt(1);
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -121,22 +124,24 @@ public class PurposeDao {
 				}
 			}
 		}
-		return ret;
+		return resultcount;
 	}
 
-	public boolean rankplace(PurposeVo vo) {
-		boolean ret = false;
+	public String rankplace() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String result = "";
 
-		String sql = "select \"PLACE_CODE\", count(\"PLACE_CODE\") from \"PURPOSE\" group by \"PLACE_CODE\" order by count(\"PLACE_CODE\") asc";
+		String sql = "select \"PLACE_CODE\" from \"PURPOSE\" group by \"PLACE_CODE\" order by count(\"PLACE_CODE\") desc";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			int result = pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
-			System.out.println(result);
-			ret = true;
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getString("PLACE_CODE");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -156,7 +161,7 @@ public class PurposeDao {
 				}
 			}
 		}
-		return ret;
+		return result;
 	}
 
 	public boolean rankpurpose(PurposeVo vo) {
@@ -169,7 +174,7 @@ public class PurposeDao {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			int result = pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
+			int result = pstmt.executeUpdate();
 			System.out.println(result);
 			ret = true;
 		} catch (SQLException e) {
@@ -199,12 +204,12 @@ public class PurposeDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		String sql = "select \"PLACE_CODE\" from \"PURPOSE\" group by \"PLACE_CODE\" having count(*) = (select max(\"top\") from (select ¡°PLACE_CODE¡±, count(*) as \"top\" from \"PURPOSE\" group by \"PLACE_CODE\") as result)";
+		String sql = "select \"PLACE_CODE\" from \"PURPOSE\" group by \"PLACE_CODE\" having count(*) = (select max(\"top\") from (select ï¿½ï¿½PLACE_CODEï¿½ï¿½, count(*) as \"top\" from \"PURPOSE\" group by \"PLACE_CODE\") as result)";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
-			int result = pstmt.executeUpdate(); // Äõ¸® Àü¼Û!
+			int result = pstmt.executeUpdate();
 			System.out.println(result);
 			ret = true;
 		} catch (SQLException e) {
