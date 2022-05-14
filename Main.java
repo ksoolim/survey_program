@@ -15,15 +15,16 @@ public class Main {
 
 		// 테이블만들기
 
-		info.createinfo();
+	/*	info.createinfo();
 		place.createplace();
 		purpose.createpurpose();
-
+		
+		
 		// place 기본 데이터 입력
 		place.insertplace(new PlaceVo(1, "서부권 (합정, 성수, 망원, 연남, 연희)"));
 		place.insertplace(new PlaceVo(2, "강남, 가로수길"));
-		place.insertplace(new PlaceVo(3, "북촌, 서촌, 삼청동 일대"));
-
+		place.insertplace(new PlaceVo(3, "북촌, 서촌, 삼청동 일대"));  
+		
 		int cnt = 1;
 		int newpcode = 3;
 		while (true) {
@@ -60,11 +61,11 @@ public class Main {
 			System.out.println("3번 : 사진 촬영");
 			System.out.println("4번 : 그냥! 이유없음");
 			int visit = Integer.parseInt(sc.nextLine());
-			purpose.insertpurpose(new PurposeVo(cnt, cnt, spot, visit));
-
+			
 			if (spot == 4) {
-
 				purpose.insertpurpose(new PurposeVo(cnt, cnt, newpcode, visit));
+			} else {
+			purpose.insertpurpose(new PurposeVo(cnt, cnt, spot, visit));
 			}
 
 			System.out.println("** 참여해주셔서 감사합니다!");
@@ -75,6 +76,7 @@ public class Main {
 				Object pass;
 				cnt++;
 			} else {
+ */
 				System.out.println("**  설문결과   **");
 				System.out.println("설문참여인원 : " + purpose.counttotal() + "명");
 				System.out.println("10대 : " + info.countinfoage1() + "명   20대 : " + info.countinfoage2() + "명  30대 : "
@@ -83,10 +85,12 @@ public class Main {
 
 				System.out.println("-------------------------------------");
 				System.out.println("<플레이스 결과 집계>");
-				System.out.println("1번: 서부권 -> " + place.countplace1() + "표");
-				System.out.println("2번: 강남권 -> " + place.countplace2() + "표");
-				System.out.println("3번: 종로일대 -> " + place.countplace3() + "표");
-				System.out.println("그 외 -> " + place.etcplace());
+				place.rankplace();
+//				System.out.println("1번: 서부권 -> " + place.countplace1() + "표");
+//				System.out.println("2번: 강남권 -> " + place.countplace2() + "표");
+//				System.out.println("3번: 종로일대 -> " + place.countplace3() + "표");
+				System.out.print("그 외 -> ");
+				place.etcplace();
 				System.out.println();
 
 				System.out.println("<방문목적 결과 집계>");
@@ -95,9 +99,9 @@ public class Main {
 				System.out.println("3번: 사진촬영 -> " + purpose.countpurpose3() + "표");
 				System.out.println("4번: 이유없음 -> " + purpose.countpurpose4() + "표");
 
-				break;
-			}
+		//	break;
+	//	}
 
-		}
+//		} 
 	}
 }

@@ -68,19 +68,19 @@ public class PurposeDao {
 			ret = true;
 			conn.commit();
 		} catch (SQLException e) {
-		//	e.printStackTrace();
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
-				//	e.printStackTrace();
+				e.printStackTrace();
 				} finally {
 					if (conn != null) {
 						try {
 							conn.close();
 						} catch (SQLException e) {
-							//e.printStackTrace();
+							e.printStackTrace();
 						}
 					}
 				}
