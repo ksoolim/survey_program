@@ -85,7 +85,7 @@ public class PlaceDao {
 		}
 		return ret;
 	}
-
+/*
 	public int countplace1() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -237,7 +237,7 @@ public class PlaceDao {
 			}
 		}
 	}
-
+*/
 	public void rankplace() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -245,9 +245,10 @@ public class PlaceDao {
 		String place = "";
 		int placecode =0;
 		int rank =1;
-		int num = 0;
+		int vote = 0;
 
-		String sql = "select * from PLACE, (select PLACE_CODE, count(PLACE_CODE) from PURPOSE group by PLACE_CODE ORDER BY count(PLACE_CODE) DESC) where PLACE.P_CODE=PLACE_CODE";
+		String sql 
+		= "select * from PLACE, (select PLACE_CODE, count(PLACE_CODE) from PURPOSE group by PLACE_CODE ORDER BY count(PLACE_CODE) DESC) where PLACE.P_CODE=PLACE_CODE";
 		try {
 			conn = jdbctemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -256,9 +257,9 @@ public class PlaceDao {
 			while (rs.next()) {   // 그다음행 결과 뽑을라고 while문 사용
 				placecode = rs.getInt(1); // 쿼리로 만든 새 테이블의 1행이 placecode
 				place = rs.getString(2); // 2행이 place
-				num = rs.getInt(4);
+				vote = rs.getInt(4);
 				System.out.print(rank+"위  -> ");
-				System.out.println(placecode+"번: "+place+"( "+num+"표 )");
+				System.out.println(placecode+"번: "+place+"( "+vote+"표 )");
 				rank++;
 			}
 

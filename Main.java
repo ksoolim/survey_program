@@ -86,18 +86,22 @@ public class Main {
 				System.out.println("-------------------------------------");
 				System.out.println("<플레이스 결과 집계>");
 				place.rankplace();
-//				System.out.println("1번: 서부권 -> " + place.countplace1() + "표");
-//				System.out.println("2번: 강남권 -> " + place.countplace2() + "표");
-//				System.out.println("3번: 종로일대 -> " + place.countplace3() + "표");
-				System.out.print("그 외 -> ");
-				place.etcplace();
 				System.out.println();
 
+				/*
+				System.out.println("1번: 서부권 -> " + place.countplace1() + "표");
+				System.out.println("2번: 강남권 -> " + place.countplace2() + "표");
+				System.out.println("3번: 종로일대 -> " + place.countplace3() + "표");
+				System.out.print("그 외 -> ");
+				place.etcplace();
+				*/
+				
 				System.out.println("<방문목적 결과 집계>");
-				System.out.println("1번: 맛집탐방 -> " + purpose.countpurpose1() + "표");
-				System.out.println("2번: 카페투어 -> " + purpose.countpurpose2() + "표");
-				System.out.println("3번: 사진촬영 -> " + purpose.countpurpose3() + "표");
-				System.out.println("4번: 이유없음 -> " + purpose.countpurpose4() + "표");
+				purpose.rankpurpose();
+			//	System.out.println("1번: 맛집탐방 -> " + purpose.countpurpose1() + "표");
+			//	System.out.println("2번: 카페투어 -> " + purpose.countpurpose2() + "표");
+			//	System.out.println("3번: 사진촬영 -> " + purpose.countpurpose3() + "표");
+			//	System.out.println("4번: 이유없음 -> " + purpose.countpurpose4() + "표");
 
 		//	break;
 	//	}
